@@ -4,13 +4,9 @@ public class Hub {
     private final String id;
     private final String province;
     private final String sortingCenter;
-    private boolean active;
+    private Object active;
 
-    public Hub(String id, String province, String sortingCenter, boolean active){
-        if (id.isEmpty() || province.isEmpty() || sortingCenter.isEmpty()){
-            throw new IllegalArgumentException("String can't be EMPTY!!!");
-        }
-
+    public Hub(String id, String province, String sortingCenter, Object active){
         this.active = active;
         this.id = id;
         this.province = province;
@@ -27,7 +23,7 @@ public class Hub {
     public String getSortingCenter() {
         return sortingCenter;
     }
-    public boolean isActive() {
+    public Object isActive() {
         return active;
     }
     public void setActive(boolean active) {
