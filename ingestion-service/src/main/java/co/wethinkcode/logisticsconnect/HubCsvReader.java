@@ -17,7 +17,7 @@ public class HubCsvReader {
                 reader.readNext();
 
                 while ((row = reader.readNext()) != null) {
-                    Hub hub = new Hub(row[0], row[1], row[2], row[3]);
+                    Hub hub = new Hub(row[0].toUpperCase(), row[1].toLowerCase(), row[2], row[3].toLowerCase());
                     hubs.add(hub);
                 }
             }
