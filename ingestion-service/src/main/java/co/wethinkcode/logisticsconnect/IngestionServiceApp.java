@@ -14,3 +14,4 @@ public class IngestionServiceApp {
         // cleaned records here for the other services to consume.
     }
 }
+
