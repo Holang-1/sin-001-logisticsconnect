@@ -1,13 +1,15 @@
 package co.wethinkcode.logisticsconnect;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HubCsvReader {
-        public List<Hub> read(String filePath) throws Exception {
+        public List<Hub> read(String filePath) throws IOException, CsvValidationException {
             List<Hub> hubs = new ArrayList<>();
 
             try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
