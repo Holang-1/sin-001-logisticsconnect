@@ -23,7 +23,7 @@ public class IngestionServiceApp {
         app.get("/health", ctx -> ctx.result("OK"));
 
         app.get("/hubs", ctx -> {
-            ctx.json(hubDataService.getHubs());
+            ctx.json(hubs);
         });
 
         app.get("/hubs/province/{province}", ctx -> {

@@ -2,6 +2,11 @@ package co.wethinkcode.logisticsconnect;
 
 import io.javalin.Javalin;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 public class HubServiceApp {
 
     public static void main(String[] args) {
@@ -9,7 +14,30 @@ public class HubServiceApp {
 
         app.get("/health", ctx -> ctx.result("OK"));
 
-        // TODO (Serves provinces and sorting centers (place-name source of truth).)
-        // Add domain endpoints for hub-service here.
+        app.get("/hubs", ctx -> {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:7050/hubs")).GET().build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            ctx.result(response.body());
+        });
+        app.get("/hubs/{id}", ctx -> {
+            HttpClient client = HttpClient.newHttpClient();
+            String id = ctx.pathParam("id");
+            String url = "http://localhost:7050/hubs/"+id;
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url)).GET().build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            ctx.result(response.body());
+        });
+        app.get("/hubs/{province}", ctx -> {
+            HttpClient client = HttpClient.newHttpClient();
+            String province = ctx.pathParam("province");
+            String url = "http://localhost:7050/hubs/"+province;
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url)).GET().build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            ctx.result(response.body());
+        });
     }
 }
