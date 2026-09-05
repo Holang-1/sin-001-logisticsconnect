@@ -14,14 +14,14 @@ public class HubServiceApp {
 
         app.get("/health", ctx -> ctx.result("OK"));
 
-        app.get("/hubs", ctx -> {
+        app.get("/hub-service/hubs", ctx -> {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:7050/hubs")).GET().build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             ctx.result(response.body());
         });
-        app.get("/hubs/{id}", ctx -> {
+        app.get("hub-service/hubs/{id}", ctx -> {
             HttpClient client = HttpClient.newHttpClient();
             String id = ctx.pathParam("id");
             String url = "http://localhost:7050/hubs/"+id;
@@ -30,7 +30,7 @@ public class HubServiceApp {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             ctx.result(response.body());
         });
-        app.get("/hubs/{province}", ctx -> {
+        app.get("hub-service/hubs/{province}", ctx -> {
             HttpClient client = HttpClient.newHttpClient();
             String province = ctx.pathParam("province");
             String url = "http://localhost:7050/hubs/"+province;
