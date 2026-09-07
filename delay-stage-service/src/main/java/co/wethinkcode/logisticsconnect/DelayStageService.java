@@ -5,19 +5,16 @@ import java.util.Map;
 
 public class DelayStageService {
 
-    private final Map<String, DelayStage> delayStages = new HashMap<>();
+    private final Map<String, DelayStage> delayStages;
 
     public DelayStageService() {
-        // Temporarily add stages
-        this.addStage("H-001", 1);
-        this.addStage("H-002", 2);
-        this.addStage("H-003", 3);
+        delayStages = new HashMap<>();
     }
 
     public DelayStage getDelayStage(String hubId) {
         return delayStages.get(hubId);
     }
-    void addStage(String hubID, int stage){
+    public void addStage(String hubID, int stage){
         DelayStage delayStage = new DelayStage(hubID, stage);
         this.delayStages.put(hubID, delayStage);
     }
