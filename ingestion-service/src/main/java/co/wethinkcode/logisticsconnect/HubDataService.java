@@ -11,10 +11,9 @@ public class HubDataService {
     private final HubDataCleaner cleaner;
     private final String filePath;
 
-    public HubDataService(HubCsvReader reader,
-          HubDataCleaner cleaner, String filePath) {
-        this.reader = reader;
-        this.cleaner = cleaner;
+    public HubDataService(String filePath) {
+        this.reader = new HubCsvReader();
+        this.cleaner = new HubDataCleaner();
         this.filePath = filePath;
     }
 

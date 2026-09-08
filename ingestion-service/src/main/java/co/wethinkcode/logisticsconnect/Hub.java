@@ -1,5 +1,7 @@
 package co.wethinkcode.logisticsconnect;
 
+import java.util.Objects;
+
 public class Hub {
     private String id;
     private String province;
@@ -37,5 +39,23 @@ public class Hub {
     }
     public void setActive(Object active) {
         this.active = active;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Hub hub = (Hub) o;
+        return Objects.equals(id, hub.id) && Objects.equals(province, hub.province)
+                && Objects.equals(sortingCenter, hub.sortingCenter) && Objects.equals(active, hub.active);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, province, sortingCenter, active);
     }
 }

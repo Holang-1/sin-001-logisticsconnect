@@ -20,6 +20,19 @@ public class HubDataCleaner {
             if (isMissing(hub.isActive().toString())){
                 hub.setActive(null);
             }else hub.setActive(trueOrFalse(hub.isActive().toString()));
+            removeDuplicates(hubs);
+        }
+    }
+    public void removeDuplicates(List<Hub> hubs){
+        for (Hub hub : hubs){
+            for (Hub hub1 : hubs){
+                if (hub == hub1){
+                    continue;
+                }
+                if (hub.equals(hub1)){
+                    hubs.remove(hub);
+                }
+            }
         }
     }
     private boolean trueOrFalse(String status){

@@ -10,11 +10,8 @@ public class IngestionServiceApp {
 
     public static void main(String[] args) throws CsvValidationException, IOException {
         String filePath = "ingestion-service/src/main/resources/hubs-global.csv";
-        HubCsvReader reader = new HubCsvReader();
-        HubDataCleaner cleaner = new HubDataCleaner();
 
-        HubDataService hubDataService = new HubDataService(
-                reader, cleaner, filePath);
+        HubDataService hubDataService = new HubDataService(filePath);
 
         List<Hub> hubs = hubDataService.getHubs();
 
