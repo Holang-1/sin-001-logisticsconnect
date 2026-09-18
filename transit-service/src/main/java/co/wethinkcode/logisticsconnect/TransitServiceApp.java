@@ -19,6 +19,7 @@ public class TransitServiceApp {
     public static void main(String[] args) {
 
         Javalin app = Javalin.create().start(7053);
+        HubClient hubClient = new HubClient();
 
         app.get("/health", ctx -> ctx.result("OK"));
 
@@ -27,8 +28,8 @@ public class TransitServiceApp {
             String idFrom = ctx.pathParam("hubIdFrom");
             String idTo = ctx.pathParam("hubIdTo");
 
-            Hub origin = getHub(idFrom);
-            Hub destination = getHub(idTo);
+            Hub origin = hubClient.getHub(idFrom);
+            Hub destination = hubClient.getHub(idTo);
 
             ETA etaCalculator = new ETA();
 
@@ -48,21 +49,4 @@ public class TransitServiceApp {
         });
     }
 
-    private static Hub getHub(String hubId) throws Exception {
-
-        String url = HUB_SERVICE_URL + "/hub-service/hubs/" + hubId;
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url)).GET().build();
-
-        HttpResponse<String> response = client.send(
-                        request, HttpResponse.BodyHandlers.ofString());
-
-        if (response.statusCode() != 200) {
-            throw new RuntimeException(
-                    "Hub not found: " + hubId);
-        }
-
-        return mapper.readValue(response.body(), Hub.class);
-    }
 }

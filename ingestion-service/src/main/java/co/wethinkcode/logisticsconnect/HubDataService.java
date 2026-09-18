@@ -10,11 +10,13 @@ public class HubDataService {
     private final HubCsvReader reader;
     private final HubDataCleaner cleaner;
     private final String filePath;
+    private final List<Hub> hubs;
 
-    public HubDataService(String filePath) {
+    public HubDataService(String filePath) throws CsvValidationException, IOException {
         this.reader = new HubCsvReader();
         this.cleaner = new HubDataCleaner();
         this.filePath = filePath;
+        this.hubs = getHubs();
     }
 
     public List<Hub> getHubs() throws IOException, CsvValidationException {
@@ -23,8 +25,6 @@ public class HubDataService {
         return hubs;
     }
     public Hub getHubById(String id) throws IOException, CsvValidationException {
-        List<Hub> hubs = getHubs();
-
         for (Hub hub : hubs) {
             if (hub.getId() == null){
                 continue;
