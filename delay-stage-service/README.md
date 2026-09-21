@@ -1,46 +1,103 @@
-# DelayStageServiceApp
+# Delay Stage Service
 
-## Overview
+The Delay Stage Service manages delay information associated with logistics hubs.
 
-Tracks the Transit Delay Stage (0-8, e.g. weather shutdowns).
+It runs independently on port `7052`.
 
-Part of the [LogisticsConnect](../README_OG.md) project. Independent Maven module, no
-parent pom.
+## Responsibilities
 
-MQ: this service publishes to the ActiveMQ topic `package-status-topic` — see [`../common/`](../common). Broker URL and topic name come from the common `co.wethinkcode.logisticsconnect.mq.MqConfig` class alongside it in this module.
+The service:
 
-## Project structure
+* Maintains delay stages for hubs
+* Returns the current delay stage for a hub
+* Publishes delay-stage information through ActiveMQ
 
-```
-delay-stage-service/
-├── pom.xml
-└── src/main/java/co/wethinkcode/logisticsconnect/
-    ├── DelayStageServiceApp.java
-    └── mq/
-        └── MqConfig.java
+Delay stages range from:
+
+```text
+0 - 8
 ```
 
-## Build
+## Port
 
-```
-mvn package
-```
-
-## Run
-
-```
-java -jar target/delay-stage-service.jar
+```text
+7052
 ```
 
-Listens on port `7052`.
+Base URL:
 
-## Test
-
-No automated tests yet. Manually verify it's up:
-
-```
-curl http://localhost:7052/health   # -> OK
+```text
+http://localhost:7052
 ```
 
-To add real tests, add JUnit 5 + the Surefire plugin to `pom.xml`, put tests under
-`src/test/java/co/wethinkcode/logisticsconnect/`, and run `mvn test`.
+## Run the Service
+
+## Health Check
+
+```bash
+curl http://localhost:7052/health
+```
+
+Expected:
+
+```text
+OK
+```
+
+## Get Delay Stage
+
+```http
+GET /delay-service/{hubId}
+```
+
+Example:
+
+```bash
+curl http://localhost:7052/delay-service/H-501
+```
+
+Example response:
+
+```json
+{
+  "hubId": "H-501",
+  "stage": 3
+}
+```
+
+## ActiveMQ
+
+Delay-stage updates are published to:
+
+```text
+package-status-topic
+```
+
+Example message:
+
+```json
+{
+  "hubId": "H-501",
+  "stage": 3
+}
+```
+
+The ActiveMQ broker runs on:
+
+```text
+tcp://localhost:61616
+```
+
+Transit subscribes to this topic.
+
+## Data Flow
+
+```text
+Delay Stage
+    ↓
+Delay Stage Service
+    ↓
+ActiveMQ
+    ↓
+Transit Service
+```
