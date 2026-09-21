@@ -8,25 +8,20 @@ public class ETA {
 
     private final LocationLoader locationLoader;
     private final DistanceEstimator distanceEstimator;
-    private final DelayStageClient delayStageClient;
 
     public ETA() {
         this.locationLoader = new LocationLoader();
         this.distanceEstimator = new DistanceEstimator();
-        this.delayStageClient = new DelayStageClient();
     }
 
-    public LocalDateTime calculateETA(Hub origin, Hub destination) throws Exception {
+    public LocalDateTime calculateETA(Hub origin, Hub destination,
+            int originDelayStage, int destinationDelayStage) throws Exception {
 
         Map<String, Coordinates> locations = locationLoader.loadLocations("coordinates.csv");
 
         double distance = distanceEstimator.estimateDistance(origin, destination, locations);
 
         Duration travelTime = distanceEstimator.estimateTime(distance);
-
-        int originDelayStage = delayStageClient.getDelayStage(origin.getId());
-
-        int destinationDelayStage = delayStageClient.getDelayStage(destination.getId());
 
         Duration delay = calculateDelay(originDelayStage, destinationDelayStage);
 

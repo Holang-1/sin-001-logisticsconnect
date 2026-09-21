@@ -1,5 +1,6 @@
 package co.wethinkcode.logisticsconnect;
 
+//import co.wethinkcode.logisticsconnect.mq.DelayStagePublisher;
 import io.javalin.Javalin;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,6 +22,9 @@ public class DelayStageServiceApp {
             }
             int randomStage = ThreadLocalRandom.current().nextInt(0, 9);
             DelayStage delayStage = new DelayStage(hub.getId(), randomStage);
+
+//            DelayStagePublisher delayStagePublisher = new DelayStagePublisher();
+//            delayStagePublisher.publish(delayStage.getHubID(), delayStage.getStage());
 
             ctx.json(delayStage);
             });
