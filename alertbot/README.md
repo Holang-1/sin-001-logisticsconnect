@@ -4,7 +4,7 @@
 
 Posts proactive delay notifications to public transit social media pages (simulated).
 
-Part of the [LogisticsConnect](../README.md) project — its alerting service.
+Part of the [LogisticsConnect](../README_OG.md) project — its alerting service.
 Independent Maven module, no parent pom.
 
 Mechanism: Outbound webhook, simulated social post

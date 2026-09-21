@@ -1,6 +1,6 @@
 # RUBRIC — for reviewers only, do not share with candidates
 
-Scores the four stages from the root [README.md](README.md#your-task) "Your task"
+Scores the four stages from the root [README.md](README_OG.md#your-task) "Your task"
 table, plus cross-cutting concerns. Stages 1-3 are required; stage 4 is a stretch
 goal — weight it as a bonus, not a requirement for a passing score.
 

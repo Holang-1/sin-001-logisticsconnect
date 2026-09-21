@@ -4,7 +4,7 @@
 
 Tracks the Transit Delay Stage (0-8, e.g. weather shutdowns).
 
-Part of the [LogisticsConnect](../README.md) project. Independent Maven module, no
+Part of the [LogisticsConnect](../README_OG.md) project. Independent Maven module, no
 parent pom.
 
 MQ: this service publishes to the ActiveMQ topic `package-status-topic` — see [`../common/`](../common). Broker URL and topic name come from the common `co.wethinkcode.logisticsconnect.mq.MqConfig` class alongside it in this module.

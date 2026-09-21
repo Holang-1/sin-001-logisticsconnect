@@ -5,7 +5,7 @@
 Parses and cleans `hubs-global.csv`, a messy legacy export of hubs, sorting centers, and regional districts data, and is the
 first stop in the LogisticsConnect pipeline. Independent Maven module, no parent pom.
 
-Part of the [LogisticsConnect](../README.md) project.
+Part of the [LogisticsConnect](../README_OG.md) project.
 
 ## Known data issues
 

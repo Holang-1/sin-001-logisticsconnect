@@ -6,7 +6,7 @@ Topic: `package-status-topic`
 
 Package status updates move from latency-driven RPC to bandwidth-driven messaging.
 
-Part of the [LogisticsConnect](../README.md) project. Holds the ActiveMQ broker shared
+Part of the [LogisticsConnect](../README_OG.md) project. Holds the ActiveMQ broker shared
 by the services below — not a service itself, so it has no port of its own.
 
 - Producer: `delay-stage-service` (`../delay-stage-service`)

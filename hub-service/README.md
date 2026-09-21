@@ -4,7 +4,7 @@
 
 Serves provinces and sorting centers (place-name source of truth).
 
-Part of the [LogisticsConnect](../README.md) project. Independent Maven module, no
+Part of the [LogisticsConnect](../README_OG.md) project. Independent Maven module, no
 parent pom.
 
 ## Project structure
