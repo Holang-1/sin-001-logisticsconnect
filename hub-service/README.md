@@ -1,41 +1,98 @@
-# HubServiceApp
+# Hub Service
 
-## Overview
+The Hub Service is responsible for providing logistics hub information to other services.
 
-Serves provinces and sorting centers (place-name source of truth).
+It runs independently on port `7051`.
 
-Part of the [LogisticsConnect](../README_OG.md) project. Independent Maven module, no
-parent pom.
+## Responsibilities
 
-## Project structure
+The service provides information about:
 
-```
-hub-service/
-├── pom.xml
-└── src/main/java/co/wethinkcode/logisticsconnect/HubServiceApp.java
-```
+* Hub ID
+* Province
+* Sorting centre
+* Active/inactive status
 
-## Build
+The service acts as the source of hub information for other services.
 
-```
-mvn package
-```
+## Port
 
-## Run
-
-```
-java -jar target/hub-service.jar
+```text
+7051
 ```
 
-Listens on port `7051`.
+Base URL:
 
-## Test
-
-No automated tests yet. Manually verify it's up:
-
-```
-curl http://localhost:7051/health   # -> OK
+```text
+http://localhost:7051
 ```
 
-To add real tests, add JUnit 5 + the Surefire plugin to `pom.xml`, put tests under
-`src/test/java/co/wethinkcode/logisticsconnect/`, and run `mvn test`.
+## Run the Service
+
+## Health Check
+
+```bash
+curl http://localhost:7051/health
+```
+
+Expected:
+
+```text
+OK
+```
+
+## Endpoints
+
+### Get All Hubs
+
+```http
+GET /hub-service/hubs/
+```
+
+Example:
+
+```bash
+curl http://localhost:7051/hub-service/hubs/
+```
+
+### Get Hub by ID
+
+```http
+GET /hub-service/hubs/{id}
+```
+
+Example:
+
+```bash
+curl http://localhost:7051/hub-service/hubs/H-501
+```
+
+### Get Hubs by Province
+
+```http
+GET /hub-service/hubs/province/{province}
+```
+
+Example:
+
+```bash
+curl http://localhost:7051/hub-service/hubs/province/Gauteng
+```
+
+## Data Flow
+
+```text
+Hub Data
+   ↓
+Hub Service
+   ↓
+REST API
+   ↓
+Other Services
+```
+
+## Dependencies
+
+The Hub Service does not need ActiveMQ to provide its REST endpoints.
+
+Other services communicate with it using HTTP.
