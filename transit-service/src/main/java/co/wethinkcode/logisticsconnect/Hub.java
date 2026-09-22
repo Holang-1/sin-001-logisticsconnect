@@ -8,6 +8,7 @@ public class Hub {
     private String sortingCenter;
 
     public Hub(){
+
     }
     public Hub(String id, String province, String sortingCenter){
 
